@@ -1,0 +1,76 @@
+format_version: 10
+pipelines:
+  expense-tf-apply:
+    group: defaultGroup
+    materials:
+      git-887d6e3:
+        git: https://github.com/iteration-2/expense-terraform.git
+        shallow_clone: false
+        auto_update: true
+        branch: main
+    stages:
+      - DEV:
+          fetch_materials: true
+          environment_variables:
+            env: dev
+          approval:
+            type: manual
+            allow_only_on_success: false
+          jobs:
+            terraform-apply-:
+              tasks:
+                - exec: {command: terraform, arguments: ["init", "-backend-config=env-dev/state.tfvars" ], run_if: passed}
+                - exec: { command: terraform, arguments: [ "apply", "-var-file=env-dev/main.tfvars", "-auto-approve"], run_if: passed }
+
+
+
+#      - QA:
+#          fetch_materials: true
+#          environment_variables:
+#            env: dev
+#          approval:
+#            type: manual
+#            allow_only_on_success: false
+#          jobs:
+#            backend-setup:
+#              timeout: 0
+#              tasks:
+#                - exec:
+#                    command: bash
+#                    arguments: [ "init", "-backend-config=env-dev/state.tfvars" ]
+#
+#                    run_if: passed
+#
+#      - STAGING:
+#          fetch_materials: true
+#          environment_variables:
+#            env: dev
+#          approval:
+#            type: manual
+#            allow_only_on_success: false
+#          jobs:
+#            backend-setup:
+#              timeout: 0
+#              tasks:
+#                - exec:
+#                    command: bash
+#                    arguments: [ "init", "-backend-config=env-dev/state.tfvars" ]
+#
+#                    run_if: passed
+#
+#      - PROD:
+#          fetch_materials: true
+#          environment_variables:
+#            env: dev
+#          approval:
+#            type: manual
+#            allow_only_on_success: false
+#          jobs:
+#            backend-setup:
+#              timeout: 0
+#              tasks:
+#                - exec:
+#                    command: bash
+#                    arguments: [ "init", "-backend-config=env-dev/state.tfvars" ]
+#
+#                    run_if: passed
