@@ -1,3 +1,3 @@
-bucket = "mybucket"
-key    = "test1/prod/state"
+bucket = "yopappiyo"
+key    = "test/prod/state"
 region = "us-east-1"
