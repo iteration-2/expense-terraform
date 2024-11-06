@@ -1,3 +1,3 @@
 bucket = "yopappiyo"
-key    = "test/dev/state"
+key    = "expense-terraform/dev/state"
 region = "us-east-1"
