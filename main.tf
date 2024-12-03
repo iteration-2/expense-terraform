@@ -1,7 +1,7 @@
 module "frontend" {
   source        = "./modules/app"
   instance_type = var.instance_type
-  component     = frontend
+  component     = "frontend"
   ssh_user      = var.ssh_user
   ssh_pass      = var.ssh_pass
   env           = var.env
@@ -12,7 +12,7 @@ module "backend" {
   depends_on = [module.mysql]
   source        = "./modules/app"
   instance_type = var.instance_type
-  component     = backend
+  component     = "backend"
   ssh_user      = var.ssh_user
   ssh_pass      = var.ssh_pass
   env           = var.env
@@ -22,7 +22,7 @@ module "backend" {
 module "mysql" {
   source        = "./modules/app"
   instance_type = var.instance_type
-  component     = mysql
+  component     = "mysql"
   ssh_user      = var.ssh_user
   ssh_pass      = var.ssh_pass
   env           = var.env
